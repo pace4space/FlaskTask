@@ -2,16 +2,18 @@
 
 from flask import Flask, request, send_file
 from datetime import datetime
+
 import mysql.connector
+import os
 
 app = Flask(__name__)
 
-# MySQL config
+# MySQL config from environment (for Docker Compose)
 MYSQL_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'root',  # Change as needed
-    'database': 'chat_db'
+    'host': os.environ.get('MYSQL_HOST', 'localhost'),
+    'user': os.environ.get('MYSQL_USER', 'root'),
+    'password': os.environ.get('MYSQL_PASSWORD', 'root'),
+    'database': os.environ.get('MYSQL_DATABASE', 'chat_db')
 }
 
 # Ensure DB and table exist
