@@ -7,7 +7,7 @@ the `chat_data/` directory. Each chat room is a separate file named
 Useful for local testing or demos when a database is not required.
 """
 
-from flask import Flask, request, send_file, jsonify
+from flask import Flask, request, render_template, jsonify
 from datetime import datetime
 import os
 
@@ -21,14 +21,14 @@ if not os.path.exists(CHAT_DIR):
 
 @app.route('/', methods=['GET'])
 def index():
-    """Serve the web client (static HTML)."""
-    return send_file('index.html')
+    """Serve the web client from the `templates` folder."""
+    return render_template('index.html')
 
 
 @app.route('/<room>', methods=['GET'])
 def room_html(room):
     """Serve the same client for any room path (client picks the room)."""
-    return send_file('index.html')
+    return render_template('index.html')
 
 
 @app.route('/api/chat/<room>', methods=['POST'])

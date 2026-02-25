@@ -11,7 +11,7 @@ Operational notes:
 - Provides two routes for chat messages: POST to add and GET to read.
 """
 
-from flask import Flask, request, send_file
+from flask import Flask, request, render_template
 from datetime import datetime
 
 import mysql.connector
@@ -63,13 +63,13 @@ init_db()
 @app.route('/', methods=['GET'])
 def index():
     """Serve the static client page."""
-    return send_file('index.html')
+    return render_template('index.html')
 
 
 @app.route('/<room>', methods=['GET'])
 def room_html(room):
     """Serve the same static client for any room URL (client handles room selection)."""
-    return send_file('index.html')
+    return render_template('index.html')
 
 
 @app.route('/api/chat/<room>', methods=['POST'])
