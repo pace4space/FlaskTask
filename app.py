@@ -63,15 +63,13 @@ init_db()
 @app.route('/', methods=['GET'])
 def index():
     """Serve the static client page."""
-    # Serve the client HTML from the templates folder.
-    return render_template('index.html')
+    return send_file('index.html')
 
 
 @app.route('/<room>', methods=['GET'])
 def room_html(room):
     """Serve the same static client for any room URL (client handles room selection)."""
-    # Client handles room selection on the front-end.
-    return render_template('index.html')
+    return send_file('index.html')
 
 
 @app.route('/api/chat/<room>', methods=['POST'])
